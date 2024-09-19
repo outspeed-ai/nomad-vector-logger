@@ -21,3 +21,4 @@ data/
 dist/
 .vscode/
 vector.toml
+.local

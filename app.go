@@ -10,6 +10,7 @@ import (
 )
 
 type Opts struct {
+	nomadSecretId       string
 	refreshInterval     time.Duration
 	removeAllocInterval time.Duration
 	nomadDataDir        string

@@ -70,16 +70,27 @@ func initConfig(cfgDefault string, envPrefix string) (*koanf.Koanf, error) {
 }
 
 // initNomadClient initialises a Nomad API client.
-func initNomadClient() (*api.Client, error) {
-	client, err := api.NewClient(api.DefaultConfig())
+func initNomadClient(secretId string) (*api.Client, error) {
+	config := api.DefaultConfig()
+
+	// add secretId to config if it's not empty
+	if len(secretId) > 0 && secretId[0] != '<' {
+		config.SecretID = secretId
+	} else {
+		fmt.Printf("WARNING: Initializing Nomad client WITHOUT SecretID since it's value is '%s'. Nomad API requests will be unauthenticated\n", secretId)
+	}
+
+	client, err := api.NewClient(config)
 	if err != nil {
 		return nil, err
 	}
+
 	return client, nil
 }
 
 func initOpts(ko *koanf.Koanf) Opts {
 	return Opts{
+		nomadSecretId:       ko.MustString("app.nomad_secret_id"),
 		refreshInterval:     ko.MustDuration("app.refresh_interval"),
 		removeAllocInterval: ko.MustDuration("app.remove_alloc_interval"),
 		nomadDataDir:        ko.MustString("app.nomad_data_dir"),

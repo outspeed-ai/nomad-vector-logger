@@ -23,7 +23,7 @@ func main() {
 	ctx, _ := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 
 	// Initialise and load the config.
-	ko, err := initConfig("config.sample.toml", "NOMAD_VECTOR_LOGGER")
+	ko, err := initConfig("config.toml", "NOMAD_VECTOR_LOGGER")
 	if err != nil {
 		fmt.Println("error initialising config", err)
 		os.Exit(1)
@@ -39,7 +39,7 @@ func main() {
 	}
 
 	// Initialise nomad events stream.
-	client, err := initNomadClient()
+	client, err := initNomadClient(app.opts.nomadSecretId)
 	if err != nil {
 		app.log.Fatal("error initialising client", "err", err)
 	}
