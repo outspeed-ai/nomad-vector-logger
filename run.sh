@@ -13,4 +13,4 @@ echo "copying bin to PATH"
 sudo cp ./bin/nomad-vector-logger.bin /usr/local/bin/
 
 echo "deploying on nomad"
-nomad run dev/deployment.hcl
+nomad run dev/deployment.nomad.hcl
