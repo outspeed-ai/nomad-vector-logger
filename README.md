@@ -68,7 +68,7 @@ This is an example JSON log collected from `nginx` task running with `raw_exec` 
 make dev
 ```
 
-You can refer to a local dev suite which runs this program in a Nomad cluster. The [jobspec](./dev/deployment.nomad) can also be used as a reference for production deployment.
+You can refer to a local dev suite which runs this program in a Nomad cluster. The [jobspec](./dev/deployment.hcl) can also be used as a reference for production deployment.
 
 ## Deployment Notes
 
@@ -104,9 +104,9 @@ $ ./nomad-vector-logger.bin --config config.toml
 
 ### Nomad
 
-View a sample deployment file at [dev/deployment.nomad](./dev/deployment.nomad).
+View a sample deployment file at [dev/deployment.hcl](./dev/deployment.hcl).
 
-### Docker 
+### Docker
 
 Docker images are available on [GitHub](https://github.com/mr-karan/nomad-vector-logger/pkgs/container/nomad-vector-logger).
 
