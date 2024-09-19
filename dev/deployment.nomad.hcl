@@ -109,14 +109,16 @@ EOH
         destination = "secrets/file.env"
         env         = true
       }
-      template {
-        data        = file(abspath("./dev/static/sink.toml.tpl"))
-        destination = "local/static/sink.toml"
-        change_mode = "restart"
-        # overriding the delimiters to [[ ]] to avoid conflicts with Vector's native templating, which also uses {{ }}
-        left_delimiter  = "[["
-        right_delimiter = "]]"
-      }
+
+      # no need of a common sink since each alloc's sink is configured in vector.toml.tmpl
+      # template {
+      #   data        = file(abspath("./dev/static/sink.toml.tpl"))
+      #   destination = "local/static/sink.toml"
+      #   change_mode = "restart"
+      #   # overriding the delimiters to [[ ]] to avoid conflicts with Vector's native templating, which also uses {{ }}
+      #   left_delimiter  = "[["
+      #   right_delimiter = "]]"
+      # }
     }
 
     task "await-config-generation" {

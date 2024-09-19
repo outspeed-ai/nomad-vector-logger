@@ -4,16 +4,33 @@ type = "file"
 include = [ "{{$value.LogDir}}" ]
 line_delimiter = "\n"
 read_from = "beginning"
+
 [transforms.transform_{{$value.Key}}]
 type = "remap"
 inputs = ["source_{{$value.Key}}"]
 source = '''
-# Store Nomad metadata.
-.nomad.namespace = "{{$value.Namespace}}"
-.nomad.node_name = "{{$value.Node}}"
-.nomad.job_name = "{{$value.Job}}"
-.nomad.group_name = "{{$value.Group}}"
-.nomad.task_name = "{{$value.Task}}"
-.nomad.alloc_id = "{{$value.ID}}"
+# .file will be a string but vector doesn't know that and will throw an error
+# because it's .file would be implicitly any. hence using to_string() with
+# a fallback since it could potentially throw an error when .file is not available
+.stream = if contains(to_string(.file) ?? "to_string() failed", "stdout") { "stdout" } else { "stderr" }
 '''
-{{ end}}
+
+[sinks.loki_{{$value.Key}}]
+type = "loki"
+inputs = ["transform_{{$value.Key}}"]
+
+# loki server details
+endpoint = "<loki-server-url>"
+auth.strategy="basic"
+auth.user="<loki-user>"
+auth.password="<loki-password>"
+
+# text encoding will push the .message field to Loki instead of the entire JSON
+encoding.codec = "text"
+
+# labels for logs
+labels.stream = "{{ `{{ .stream }}` }}"  # fetch the evaluated stream from the transform block
+labels.job_id = "{{$value.Job}}"
+labels.function_id = "{{$value.JobMetaFunctionId}}"
+labels.user_id = "{{$value.JobMetaUserId}}"
+{{ end }}

@@ -16,6 +16,9 @@ type Opts struct {
 	nomadDataDir        string
 	vectorConfigDir     string
 	extraTemplatesDir   string
+
+	// vector configs will be generated for only those allocations whose JobID starts with this prefix
+	nomadJobIdPrefix string
 }
 
 // App is the global container that holds
@@ -40,6 +43,12 @@ type AllocMeta struct {
 	Task      string
 	Node      string
 	Group     string
+
+	// `function_id` from runner jobspec's meta block
+	JobMetaFunctionId string
+
+	// `user_id` from runner jobspec's meta block
+	JobMetaUserId string
 }
 
 // Start initialises the subscription stream in background and waits
