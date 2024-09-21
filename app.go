@@ -19,6 +19,10 @@ type Opts struct {
 
 	// vector configs will be generated for only those allocations whose JobID starts with this prefix
 	nomadJobIdPrefix string
+
+	lokiEndpoint string
+	lokiUser     string
+	lokiPassword string
 }
 
 // App is the global container that holds
@@ -47,6 +51,11 @@ type AllocMeta struct {
 	// `Meta` block from jobspec.
 	// we use it to get `user_id` and `function_id`
 	Meta map[string]string
+
+	// Grafana Loki settings
+	LokiEndpoint string
+	LokiUser     string
+	LokiPassword string
 }
 
 // Start initialises the subscription stream in background and waits

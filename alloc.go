@@ -112,6 +112,13 @@ func (app *App) generateConfig(allocs map[string]*api.Allocation) error {
 				Task:      task,
 				Job:       alloc.JobID,
 				Meta:      alloc.Job.Meta,
+
+				// todo: figure out a way to optimize this part by not having to put it in each
+				// AllocMeta struct since these 3 settings are going to be the same so there's no need to
+				// put them per allocation
+				LokiEndpoint: app.opts.lokiEndpoint,
+				LokiUser:     app.opts.lokiUser,
+				LokiPassword: app.opts.lokiPassword,
 			})
 		}
 	}

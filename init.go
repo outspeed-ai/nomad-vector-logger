@@ -97,5 +97,8 @@ func initOpts(ko *koanf.Koanf) Opts {
 		vectorConfigDir:     ko.MustString("app.vector_config_dir"),
 		extraTemplatesDir:   ko.String("app.extra_templates_dir"),
 		nomadJobIdPrefix:    ko.String("app.nomad_job_id_prefix"),
+		lokiEndpoint:        ko.String("app.loki.endpoint"),
+		lokiUser:            ko.String("app.loki.user"),
+		lokiPassword:        ko.String("app.loki.password"),
 	}
 }
