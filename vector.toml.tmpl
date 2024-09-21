@@ -31,6 +31,6 @@ encoding.codec = "text"
 # labels for logs
 labels.stream = "{{ `{{ .stream }}` }}"  # fetch the evaluated stream from the transform block
 labels.job_id = "{{$value.Job}}"
-labels.function_id = "{{$value.JobMetaFunctionId}}"
-labels.user_id = "{{$value.JobMetaUserId}}"
+labels.function_id = "{{index $value.Meta "function_id"}}"
+labels.user_id = "{{index $value.Meta "user_id"}}"
 {{ end }}

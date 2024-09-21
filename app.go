@@ -44,11 +44,9 @@ type AllocMeta struct {
 	Node      string
 	Group     string
 
-	// `function_id` from runner jobspec's meta block
-	JobMetaFunctionId string
-
-	// `user_id` from runner jobspec's meta block
-	JobMetaUserId string
+	// `Meta` block from jobspec.
+	// we use it to get `user_id` and `function_id`
+	Meta map[string]string
 }
 
 // Start initialises the subscription stream in background and waits
