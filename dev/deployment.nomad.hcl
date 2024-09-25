@@ -39,7 +39,7 @@ job "vector" {
       # Run the program.
       config {
         # Path to vector on your host machine.
-        command = "/usr/local/bin/vector"
+        command = "/usr/bin/vector"
         args = [
           "--watch-config",
           "--config",
