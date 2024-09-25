@@ -20,10 +20,10 @@ type = "loki"
 inputs = ["transform_{{$value.Key}}"]
 
 # loki server details
-endpoint = "<loki-server-url>"
+endpoint = "{{$value.LokiEndpoint}}"
 auth.strategy="basic"
-auth.user="<loki-user>"
-auth.password="<loki-password>"
+auth.user="{{$value.LokiUser}}"
+auth.password="{{$value.LokiPassword}}"
 
 # text encoding will push the .message field to Loki instead of the entire JSON
 encoding.codec = "text"
