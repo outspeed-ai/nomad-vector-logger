@@ -34,3 +34,6 @@ labels.job_id = "{{$value.Job}}"
 labels.function_id = "{{index $value.Meta "function_id"}}"
 labels.user_id = "{{index $value.Meta "user_id"}}"
 {{ end }}
+
+# send a batch of logs every 5 seconds. default is 1s which is overkill ig
+batch.timeout_secs = 5
