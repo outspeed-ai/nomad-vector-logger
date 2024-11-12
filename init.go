@@ -90,15 +90,16 @@ func initNomadClient(secretId string) (*api.Client, error) {
 
 func initOpts(ko *koanf.Koanf) Opts {
 	return Opts{
-		nomadSecretId:       ko.MustString("app.nomad_secret_id"),
-		refreshInterval:     ko.MustDuration("app.refresh_interval"),
-		removeAllocInterval: ko.MustDuration("app.remove_alloc_interval"),
-		nomadDataDir:        ko.MustString("app.nomad_data_dir"),
-		vectorConfigDir:     ko.MustString("app.vector_config_dir"),
-		extraTemplatesDir:   ko.String("app.extra_templates_dir"),
-		nomadJobIdPrefix:    ko.String("app.nomad_job_id_prefix"),
-		lokiEndpoint:        ko.String("app.loki.endpoint"),
-		lokiUser:            ko.String("app.loki.user"),
-		lokiPassword:        ko.String("app.loki.password"),
+		nomadSecretId:          ko.MustString("app.nomad_secret_id"),
+		refreshInterval:        ko.MustDuration("app.refresh_interval"),
+		removeAllocInterval:    ko.MustDuration("app.remove_alloc_interval"),
+		nomadDataDir:           ko.MustString("app.nomad_data_dir"),
+		vectorConfigDir:        ko.MustString("app.vector_config_dir"),
+		extraTemplatesDir:      ko.String("app.extra_templates_dir"),
+		nomadOutspeedServerJob: ko.MustString("app.nomad_outspeed_server_job"),
+		nomadJobIdPrefix:       ko.String("app.nomad_job_id_prefix"),
+		lokiEndpoint:           ko.String("app.loki.endpoint"),
+		lokiUser:               ko.String("app.loki.user"),
+		lokiPassword:           ko.String("app.loki.password"),
 	}
 }

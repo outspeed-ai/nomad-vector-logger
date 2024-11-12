@@ -20,6 +20,9 @@ type Opts struct {
 	// vector configs will be generated for only those allocations whose JobID starts with this prefix
 	nomadJobIdPrefix string
 
+	// this is an exception to above rule. we will also ship logs for Outspeed server
+	nomadOutspeedServerJob string
+
 	lokiEndpoint string
 	lokiUser     string
 	lokiPassword string

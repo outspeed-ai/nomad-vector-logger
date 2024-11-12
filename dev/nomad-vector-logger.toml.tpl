@@ -7,6 +7,8 @@ remove_alloc_interval = "30s" # If the alloc is completed or stopped, the alloca
 nomad_data_dir = "/opt/nomad/data/alloc" # Nomad data directory where alloc logs are stored.
 vector_config_dir = "{{ env \"NOMAD_ALLOC_DIR\" }}/vector_gen_configs" # Path to the generated vector config file.
 extra_templates_dir = "{{ env \"NOMAD_TASK_DIR\" }}/static/" #  Extra templates that can be given. They will be rendered in `$vector_config_dir`. You can use variables mentioned in vector.tmpl if required.
+nomad_outspeed_server_job = "outspeed-server"
+nomad_job_id_prefix = "job-"
 
 [app.loki]
 endpoint = "<your-grafana-loki-endpoint>"
